@@ -8,7 +8,7 @@ public class DBUtils {
     static Connection getConn() {
         Connection conn = null;
         try {
-            Class.forName(conf.getDriverName());
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(conf.getURL(), conf.getUSER(), conf.getPWD());
             System.out.println("数据库连接成功！");
         } catch (ClassNotFoundException | SQLException e) {
@@ -19,7 +19,7 @@ public class DBUtils {
     }
 
 
-    static boolean register(String name, String pwd) {
+    public static boolean register(String name, String pwd) {
         Connection conn = getConn();
         String sql = "insert into user(name,pwd) values (?,?)";
         try {
@@ -34,7 +34,7 @@ public class DBUtils {
         }
     }
 
-    static boolean login(String name, String pwd) {
+    public static boolean login(String name, String pwd) {
         Connection conn = getConn();
         String sql = "select * from user where name=? and pwd=?";
         try {
@@ -46,10 +46,5 @@ public class DBUtils {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) {
-        if (login("旭旭", "zcx123")) System.out.println("登录成功！");
-        else System.out.println("登录失败");
     }
 }
