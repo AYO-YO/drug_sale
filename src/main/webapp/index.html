@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>帆帆大药房 - 你的家庭药师</title>
+    <link href="css/init.css" rel="stylesheet">
+    <link href="font/iconfont.css" rel="stylesheet">
+    <link href="css/thisWeb.css" rel="stylesheet">
+    <link href="css/css_index.css" rel="stylesheet">
+    <script>
+        function scrollBottom() {
+            let tops = document.getElementsByClassName('return_top')[0];
+            let clients = window.innerHeight;
+            let scrollTop = document.documentElement.scrollTop;
+            let wholeTop = document.documentElement.scrollHeight;
+            if (clients + scrollTop >= wholeTop / 1.1) {
+                tops.style.transform = "scale(1.2)";
+            } else {
+                tops.style.transform = "";
+            }
+        }
+
+        window.onscroll = scrollBottom;
+    </script>
+</head>
+<body>
+<header class="header">
+    <nav class="top_bar">
+        <img alt="" class="logo" src="img/logo.png">
+        <ul class="top_nav_bar">
+            <li>首页</li>
+            <li>药库</li>
+            <li>家庭常备</li>
+        </ul>
+        <a class="new_user" href="./register">新用户注册</a>
+        <div class="user">
+            <a href="https://blog.csdn.net/weixin_44289959">
+                <img alt="" class="user_head" src="img/user_head.jpg">
+                <span>耿一帆</span>
+            </a>
+        </div>
+        <div class="user_notice iconfont icon-lingdang" onclick="alert('没有通知。')">
+        </div>
+        <div class="search">
+            <input class="ser_text" id="ser_text" name="ser_text" type="text">
+            <button class="iconfont icon-sousuo ser_but" id="ser_but" name="ser_button" type="submit"></button>
+        </div>
+    </nav>
+</header>
+<div class="banner">
+    <div class="ban_body">
+        <img alt="" class="img_ban" src="img/sale_ad.png">
+        <ul class="sub_nav">
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+            <li><a href="">药品类别<span>&gtcir;</span></a></li>
+        </ul>
+        <ul class="nav_dot">
+            <li class="li_dot checked_dot"></li>
+            <li class="li_dot"></li>
+            <li class="li_dot"></li>
+            <li class="li_dot"></li>
+            <li class="li_dot"></li>
+        </ul>
+        <script>
+            let dots = document.getElementsByClassName('li_dot');
+            for (let j = 0; j < 5; j++) {
+                dots[j].onmouseenter = function () {
+                    for (let i = 0; i < 5; i++) {
+                        dots[i].className = 'li_dot';
+                    }
+                    dots[j].className += " checked_dot";
+                }
+            }
+        </script>
+        <div class="my_drug">
+            <h2 class="md_title">我的药箱</h2>
+            <ul class="md_body">
+                <li><h4>药品名称</h4>
+                    <p>药品数量</p></li>
+                <li><h4>药品名称</h4>
+                    <p>药品数量</p></li>
+                <li><h4>药品名称</h4>
+                    <p>药品数量</p></li>
+            </ul>
+            <a class="cou_footer" href="">全部药品</a>
+        </div>
+    </div>
+</div>
+<div class="main_body">
+    <div class="drugs_feature">
+        <h3 class="feature_title">药品推荐</h3>
+        <ul class="drugs_list">
+            <li><a href="">药品名称</a></li>
+            <li><a href="">药品名称</a></li>
+            <li><a href="">药品名称</a></li>
+            <li><a href="">药品名称</a></li>
+            <li><a href="">药品名称</a></li>
+        </ul>
+        <a class="change_symptom" href="javascript:alert('别改了，')">修改症状</a>
+    </div>
+    <h3 class="feature_title" style="color: #555;margin-top: 10px;">热销药品Top10</h3>
+    <span class="look_more">查看全部</span>
+    <ul class="clear hot_drug_item">
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="new_hot_course hot_course"></div>
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="new_hot_course hot_course"></div>
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="new_hot_course new_course"></div>
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span><span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+        <li>
+            <img alt="" src="img/pic.png">
+            <div class="item_body">
+                <a href="">参天地夸磷索钠滴眼液</a>
+                <span class="course_status">眼药水</span>
+                <span class="bought_count"><span>9999+</span>人已购</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="clear_footer clear">
+    <div class="footer">
+        <div class="foot_main">
+            <div class="foot_left">
+                <img alt="" class="logo" src="img/logo.png" style="float: none;display: block; margin: 0 auto;">
+                <p class="cr">帆帆售药<br>
+                    2022年 2fanbaby保留所有权利。-豫ICP备2021025365号</p>
+                <a class="down_app" href="">下载APP</a>
+            </div>
+            <div class="foot_right">
+                <ul class="Links">
+                    关于药品
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                </ul>
+                <ul class="Links">
+                    关于药品
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                </ul>
+                <ul class="Links">
+                    关于药品
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                    <li><a href="">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="return_top iconfont icon-fanhuidingbu" href="#" onclick="scroll(0,0)" title="点击返回顶部"></a>
+<script>
+    document.children[1]
+</script>
+</body>
+</html>
