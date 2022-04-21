@@ -6,7 +6,7 @@ public class DBUtils {
     static Config conf = new Config();
 
     static Connection getConn() {
-        Connection conn = null;
+        Connection conn;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(conf.getURL(), conf.getUSER(), conf.getPWD());
