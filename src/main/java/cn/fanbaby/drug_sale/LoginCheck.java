@@ -19,8 +19,7 @@ public class LoginCheck extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        if (DBUtils.login(user, pwd)) out.println("登录成功！");
-        else out.println("登录失败！请检查用户名及密码！");
+        out.println(DBUtils.login(user, pwd));
     }
 
     public void destroy() {

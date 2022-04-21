@@ -21,7 +21,6 @@ public class Register extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        if (DBUtils.register(user, pwd)) out.println("注册成功！");
-        else out.println("注册失败");
+        out.println(DBUtils.register(user, pwd));
     }
 }
