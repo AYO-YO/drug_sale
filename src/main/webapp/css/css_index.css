@@ -55,6 +55,10 @@
     cursor: pointer;
 }
 
+.user_handle:hover {
+    color: red;
+}
+
 #my_drug_btn {
     position: relative;
     margin-right: 30px;
