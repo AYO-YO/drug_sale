@@ -45,13 +45,19 @@
     border-bottom: 2px solid #f31d00;
 }
 
-.new_user {
+.user_handle {
     float: right;
     margin-top: 6px;
     height: 30px;
     line-height: 30px;
     color: red;
     text-decoration: 1px solid red underline;
+    cursor: pointer;
+}
+
+#my_drug_btn {
+    position: relative;
+    margin-right: 30px;
 }
 
 .user {
@@ -198,12 +204,13 @@
     width: 230px;
     height: 300px;
     position: absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -150px;
+    margin-left: -85px;
     border-radius: 15px;
     overflow: hidden;
     background-color: #fff;
+    display: none;
+    transition: all .3s;
+    top: 50px;
 }
 
 .md_title {
