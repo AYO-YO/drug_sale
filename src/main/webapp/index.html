@@ -283,7 +283,7 @@
                                 console.log(json);
                                 if (json) {
                                     alert(oUser + ', 欢迎你！');
-                                    document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-default").click();
+                                    document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                                     document.querySelector("body > header > nav > a:nth-child(4)").innerHTML = oUser;
                                     oMyDrug.style.display = '';
                                 } else {
@@ -343,7 +343,7 @@
                                 console.log(json);
                                 if (json) {
                                     alert(oUser + ', 注册成功！');
-                                    document.querySelector("#registerModal > div > div > div.modal-footer > button.btn.btn-default").click();
+                                    document.querySelector("#registerModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                                 } else {
                                     alert("注册失败！");
                                 }
