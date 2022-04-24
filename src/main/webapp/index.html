@@ -31,55 +31,7 @@
     </script>
 </head>
 <body>
-<header class="header">
-    <nav class="top_bar">
-        <img alt="" class="logo" src="img/logo.png">
-        <ul class="top_nav_bar">
-            <li>首页</li>
-            <li>药库</li>
-            <li>家庭常备</li>
-        </ul>
-        <a class="user_handle" data-bs-target="#registerModal" data-bs-toggle="modal" style="cursor: pointer;">新用户注册</a>
-        <a class="user_handle" data-bs-target="#loginModal" data-bs-toggle="modal"
-           style="margin-right: 30px; cursor: pointer;">用户登录</a>
-        <div class="user_handle" id="my_drug_btn" style="display: none">我的药箱
-            <div class="my_drug">
-                <h2 class="md_title">我的药箱</h2>
-                <ul class="md_body">
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                </ul>
-                <a class="cou_footer" href="">全部药品</a>
-            </div>
-        </div>
-        <script>
-            let show = false,
-                oBtn = document.querySelector('#my_drug_btn'),
-                oDrug = document.querySelector('.my_drug');
-            oBtn.onclick = function () {
-                if (!show) {
-                    oDrug.style.display = 'block';
-                    show = true;
-                } else {
-                    oDrug.style.display = '';
-                    show = false;
-                }
-            }
-        </script>
-        <button class="user_notice iconfont icon-lingdang" data-bs-container="body"
-                data-bs-content="暂无通知" data-bs-placement="bottom" data-bs-toggle="popover"
-                title="通知">
-        </button>
-        <div class="search">
-            <input class="ser_text" id="ser_text" name="ser_text" type="text">
-            <button class="iconfont icon-sousuo ser_but" id="ser_but" name="ser_button" type="submit"></button>
-        </div>
-    </nav>
-</header>
+<header id="headerContent"></header>
 <div class="banner">
     <div class="ban_body">
         <img alt="" class="img_ban" src="img/sale_ad.png">
@@ -201,44 +153,7 @@
         </li>
     </ul>
 </div>
-<div class="clear_footer clear">
-    <div class="footer">
-        <div class="foot_main">
-            <div class="foot_left">
-                <img alt="" class="logo" src="img/logo.png" style="float: none;display: block; margin: 0 auto;">
-                <p class="cr">帆帆售药<br>
-                    2022年 2fanbaby保留所有权利。-豫ICP备2021025365号</p>
-                <a class="down_app" href="">下载APP</a>
-            </div>
-            <div class="foot_right">
-                <ul class="Links">
-                    关于药品
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                </ul>
-                <ul class="Links">
-                    关于药品
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                </ul>
-                <ul class="Links">
-                    关于药品
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                    <li><a href="">关于</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<footer id="footerContent"></footer>
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="loginModal" role="dialog"
      tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -359,10 +274,11 @@
     </div><!-- /.modal -->
 </div>
 <a class="return_top iconfont icon-fanhuidingbu" href="#" onclick="scroll(0,0)" title="点击返回顶部"></a>
-<script>
-    $(function () {
-        $("[data-bs-toggle='popover']").popover();
-    })
-</script>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#headerContent").load("common/header.html");
+        $("#footerContent").load("common/footer.html");
+    });
+</script>
 </html>
