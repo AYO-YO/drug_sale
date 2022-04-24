@@ -314,6 +314,9 @@
 
 .hot_drug_item {
     width: 1225px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .hot_drug_item li {
@@ -321,7 +324,6 @@
     width: 228px;
     height: 270px;
     background-color: #fff;
-    margin-right: 15px;
     margin-bottom: 15px;
     transition: all .3s;
     border-radius: 3px;
