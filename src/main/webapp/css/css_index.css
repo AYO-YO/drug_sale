@@ -114,7 +114,7 @@
 }
 
 .ser_but {
-    height: 36px;
+    height: 35px;
     width: 50px;
     float: left;
     color: white;
@@ -124,7 +124,6 @@
 }
 
 .banner {
-    margin-top: 75px;
     height: 420px;
     background-color: #ff823d;
     /*overflow: hidden;*/
@@ -465,4 +464,70 @@ a.down_app {
 .return_top:hover::before {
     content: "返回 顶部";
     font-size: 16px;
+}
+
+
+.li_meds {
+    padding: 15px;
+    width: 800px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+
+.bg_model {
+    background-color: #fff;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+/* Chrome浏览器 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Firefox浏览器 */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.cart_numb {
+    float: left;
+    border: 1px solid #888;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.cart_numb_btn {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 24px;
+    text-align: center;
+}
+
+#meds_numb {
+    text-align: center;
+}
+
+.btn_add_cart {
+    color: red;
+    text-decoration: 1px solid red;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.btn_add_cart:hover {
+    color: orangered;
+    transform: scale(1.2);
 }

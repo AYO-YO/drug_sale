@@ -7,10 +7,10 @@
 <body>
 <header class="header">
     <nav class="top_bar">
-        <img alt="" class="logo" src="../img/logo.png">
+        <img alt="" class="logo" src="img/logo.png">
         <ul class="top_nav_bar">
-            <li>首页</li>
-            <li>药库</li>
+            <li id="btn_goto_index">首页</li>
+            <li id="btn_goto_store">药库</li>
             <li>家庭常备</li>
         </ul>
         <a class="user_handle" data-bs-target="#registerModal" data-bs-toggle="modal" style="cursor: pointer;">新用户注册</a>
@@ -31,9 +31,9 @@
             </div>
         </div>
         <script>
-            let show = false,
-                oBtn = document.querySelector('#my_drug_btn'),
-                oDrug = document.querySelector('.my_drug');
+            var show = false;
+            oBtn = document.querySelector('#my_drug_btn');
+            oDrug = document.querySelector('.my_drug');
             oBtn.onclick = function () {
                 if (!show) {
                     oDrug.style.display = 'block';
@@ -56,8 +56,21 @@
     <script>
         $(function () {
             $("[data-bs-toggle='popover']").popover();
-        })
+        });
+
+        $("#btn_goto_store").click(function () {
+            console.log("跳转药品库")
+            $("#mainContent").load("html/store.html");
+            document.title = "药品库 - 帆帆大药房"
+        });
+
+        $("#btn_goto_index").click(function () {
+            console.log("跳转首页")
+            $("#mainContent").load("html/main.html");
+            document.title = "帆帆大药房 - 你的家庭药师";
+        });
     </script>
+
 </header>
 </body>
 </html>

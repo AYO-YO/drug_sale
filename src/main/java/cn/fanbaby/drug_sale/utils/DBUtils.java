@@ -22,8 +22,7 @@ public class DBUtils {
     public static boolean register(String name, String pwd) {
         Connection conn = getConn();
         String sql = "insert into user(name,pwd) values (?,?)";
-        try {
-            PreparedStatement pstm = conn.prepareStatement(sql);
+        try (PreparedStatement pstm = conn.prepareStatement(sql);) {
             pstm.setString(1, name);
             pstm.setString(2, pwd);
             return pstm.executeUpdate() >= 1;
@@ -37,12 +36,22 @@ public class DBUtils {
     public static boolean login(String name, String pwd) {
         Connection conn = getConn();
         String sql = "select * from user where name=? and pwd=?";
-        try {
-            PreparedStatement pstm = conn.prepareStatement(sql);
+        try (PreparedStatement pstm = conn.prepareStatement(sql);) {
             pstm.setString(1, name);
             pstm.setString(2, pwd);
             ResultSet rs = pstm.executeQuery();
             return rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ResultSet getAllMeds() {
+        Connection conn = getConn();
+        String sql = "select * from medicines";
+        try {
+            Statement stmt = conn.createStatement();
+            return stmt.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
