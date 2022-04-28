@@ -536,3 +536,11 @@ input[type="number"] {
 .user_control_center {
     float: right;
 }
+
+.alert {
+    position: fixed;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: -90%;
+    z-index: 2000;
+}

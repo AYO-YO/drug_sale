@@ -10,12 +10,26 @@ function handleDots() {
     }
 }
 
+function alert(message, type) {
+    let wrapper = document.createElement('div')
+    document.body.appendChild(wrapper);
+    wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible fade hide" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+    wrapper = wrapper.childNodes[0];
+    wrapper.className = 'alert alert-' + type + ' alert-dismissible fade show';
+    window.setTimeout(function () {
+        wrapper.className = 'alert alert-' + type + ' alert-dismissible fade hide';
+    }, 2000);//显示的时间
+    window.setTimeout(function () {
+        wrapper.parentNode.remove();
+    }, 3000);
+}
+
 function loadIndex() {
     $(document).ready(function () {
+        $("#commonContent").load("html/common.html");
         $("#headerContent").load("html/header.html");
         $("#mainContent").load("html/main.html");
         $("#footerContent").load("html/footer.html");
-        $("#commonContent").load("html/common.html");
     });
 }
 
@@ -76,12 +90,12 @@ function login() {
             let json = httpRequest.responseText;//获取到服务端返回的数据
             console.log(json);
             if (json) {
-                alert(oUser + ', 欢迎你！');
+                alert(oUser + ', 欢迎你！', 'success');
                 sessionStorage.setItem('userName', oUser);
                 document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                 getUser();
             } else {
-                alert("用户名或密码错误！");
+                alert("用户名或密码错误！", 'danger');
             }
         }
     };
@@ -102,10 +116,10 @@ function reg() {
             let json = httpRequest.responseText;//获取到服务端返回的数据
             console.log(json);
             if (json) {
-                alert(oUser + ', 注册成功！');
+                alert(oUser + ', 注册成功！', 'success');
                 document.querySelector("#registerModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
             } else {
-                alert("注册失败！");
+                alert("注册失败！", 'warning');
             }
         }
     };
@@ -126,7 +140,7 @@ function getMeds() {
             console.log(json);
             json = JSON.parse(json);
             console.log(json);
-            let res = "";
+            let user = sessionStorage.getItem('userName');
             let tab = document.querySelector("#store_list");
             for (let meds of json) {
                 let s = '<tr>';
@@ -136,12 +150,10 @@ function getMeds() {
                 s += "<td>" + meds['stock'] + "</td>";
                 s += "<td>" + meds['date'] + "</td>";
                 s += "<td>" + meds['life'] + "</td>";
-                s += "<td><a class=\"btn_add_cart\" href=\"GetMedicines?medid=" + meds['id'] + "\">加入购物车</a></td>";
+                s += "<td><a class=\"btn_add_cart\" href=\"GetMedicines?medid=" + meds['id'] + "&userid=" + user + "\">加入购物车</a></td>";
                 s += "</tr>";
                 tab.innerHTML += s;
             }
-            console.log(json[0]);
-            console.log(json[0]['id']);
         }
     };
 }

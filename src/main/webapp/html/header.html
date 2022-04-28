@@ -5,6 +5,7 @@
     <title>Header</title>
 </head>
 <body>
+<div data-bs-dismiss="alert" id="liveAlertPlaceholder"></div>
 <header class="header">
     <nav class="top_bar">
         <img alt="" class="logo" src="img/logo.png">
@@ -32,9 +33,14 @@
         });
 
         $("#btn_goto_store").click(function () {
-            console.log("跳转药品库")
-            $("#mainContent").load("html/store.html");
-            document.title = "药品库 - 帆帆大药房"
+            console.log("跳转药品库");
+            let user = sessionStorage.getItem('userName');
+            if (user != null) {
+                $("#mainContent").load("html/store.html");
+                document.title = "药品库 - 帆帆大药房";
+            } else {
+                alert('请先登录！', 'danger');
+            }
         });
 
         $("#btn_goto_index").click(function () {
