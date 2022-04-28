@@ -33,14 +33,17 @@ public class DBUtils {
         }
     }
 
-    public static boolean login(String name, String pwd) {
+    public static int login(String name, String pwd) {
         Connection conn = getConn();
-        String sql = "select * from user where name=? and pwd=?";
+        String sql = "select _id from user where name=? and pwd=?";
         try (PreparedStatement pstm = conn.prepareStatement(sql);) {
             pstm.setString(1, name);
             pstm.setString(2, pwd);
             ResultSet rs = pstm.executeQuery();
-            return rs.next();
+            if (rs.next())
+                return rs.getInt(1);
+            else
+                return -1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,12 +51,25 @@ public class DBUtils {
 
     public static ResultSet getAllMeds() {
         Connection conn = getConn();
-        String sql = "select * from medicines";
+        String sql = "select * from drug";
         try {
             Statement stmt = conn.createStatement();
             return stmt.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean addCart(String userId, String drugId) {
+        Connection conn = getConn();
+        String sql = "insert into cart(user_id,drug_id) values (?,?)";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            pstmt.setString(2, drugId);
+            return pstmt.executeUpdate() >= 1;
+        } catch (SQLException e) {
+            return false;
         }
     }
 }

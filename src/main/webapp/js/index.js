@@ -89,9 +89,10 @@ function login() {
         if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
             let json = httpRequest.responseText;//获取到服务端返回的数据
             console.log(json);
-            if (json) {
+            if (parseInt(json) !== -1) {
                 alert(oUser + ', 欢迎你！', 'success');
                 sessionStorage.setItem('userName', oUser);
+                sessionStorage.setItem('userId', json);
                 document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                 getUser();
             } else {
@@ -140,19 +141,44 @@ function getMeds() {
             console.log(json);
             json = JSON.parse(json);
             console.log(json);
-            let user = sessionStorage.getItem('userName');
+            let user = sessionStorage.getItem('userId');
             let tab = document.querySelector("#store_list");
             for (let meds of json) {
-                let s = '<tr>';
+                let s = '<tr id="cart_row_' + meds["id"] + '">';
                 s += "<td>" + meds['id'] + "</td>";
                 s += "<td>" + meds['name'] + "</td>";
                 s += "<td>" + meds['price'] + "</td>";
                 s += "<td>" + meds['stock'] + "</td>";
                 s += "<td>" + meds['date'] + "</td>";
                 s += "<td>" + meds['life'] + "</td>";
-                s += "<td><a class=\"btn_add_cart\" href=\"GetMedicines?medid=" + meds['id'] + "&userid=" + user + "\">加入购物车</a></td>";
+                // s += "<td><a class=\"btn_add_cart\" href=\"AddCart?medid=" + meds['id'] + "&userid=" + user + "\">加入购物车</a></td>";
                 s += "</tr>";
                 tab.innerHTML += s;
+                let oRow = document.querySelector("#cart_row_" + meds["id"]);
+                let oA = document.createElement("a");
+                oA.innerHTML = "加入购物车";
+                oA.className = "btn_add_cart";
+                oA.onclick = function () {
+                    let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+                    httpRequest.open('POST', './AddCart', true); //第二步：打开连接
+                    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+                    httpRequest.send('medid=' + meds['id'] + '&userid=' + user);//发送请求 将情头体写在send中
+                    /**
+                     * 获取数据后的处理程序
+                     */
+                    httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+                        if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
+                            let json = httpRequest.responseText;//获取到服务端返回的数据
+                            console.log(json);
+                            if (json) {
+                                alert("加入购物车成功！");
+                            } else alert("不可重复加购！");
+                        }
+                    };
+                }
+                let oTd = document.createElement('td');
+                oTd.appendChild(oA);
+                oRow.appendChild(oTd);
             }
         }
     };
