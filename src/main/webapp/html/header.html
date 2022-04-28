@@ -13,37 +13,10 @@
             <li id="btn_goto_store">药库</li>
             <li>家庭常备</li>
         </ul>
-        <a class="user_handle" data-bs-target="#registerModal" data-bs-toggle="modal" style="cursor: pointer;">新用户注册</a>
-        <a class="user_handle" data-bs-target="#loginModal" data-bs-toggle="modal"
-           style="margin-right: 30px; cursor: pointer;">用户登录</a>
-        <div class="user_handle" id="my_drug_btn" style="display: none">我的药箱
-            <div class="my_drug">
-                <h2 class="md_title">我的药箱</h2>
-                <ul class="md_body">
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                    <li><h5>药品名称</h5>
-                        <p>药品数量</p></li>
-                </ul>
-                <a class="cou_footer" href="">全部药品</a>
-            </div>
+        <div class="user_control_center">
+            <a class="user_handle" data-bs-target="#registerModal" data-bs-toggle="modal">新用户注册</a>
+            <a class="user_handle" data-bs-target="#loginModal" data-bs-toggle="modal">用户登录</a>
         </div>
-        <script>
-            var show = false;
-            oBtn = document.querySelector('#my_drug_btn');
-            oDrug = document.querySelector('.my_drug');
-            oBtn.onclick = function () {
-                if (!show) {
-                    oDrug.style.display = 'block';
-                    show = true;
-                } else {
-                    oDrug.style.display = '';
-                    show = false;
-                }
-            }
-        </script>
         <button class="user_notice iconfont icon-lingdang" data-bs-container="body"
                 data-bs-content="暂无通知" data-bs-placement="bottom" data-bs-toggle="popover"
                 title="通知">
@@ -69,8 +42,9 @@
             $("#mainContent").load("html/main.html");
             document.title = "帆帆大药房 - 你的家庭药师";
         });
-    </script>
 
+        getUser();
+    </script>
 </header>
 </body>
 </html>

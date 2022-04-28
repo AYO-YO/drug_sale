@@ -19,10 +19,51 @@ function loadIndex() {
     });
 }
 
+
+function exit() {
+    sessionStorage.removeItem('userName');
+    window.location.reload();
+}
+
+function getUser() {
+    let userName = sessionStorage.getItem('userName');
+    if (userName != null) {
+        console.log('用户' + userName + '已登录。')
+        let parent = document.querySelector('.user_control_center');
+        console.log(parent);
+        let nodes = parent.children;
+        let l = nodes.length
+        for (let i = 0; i < l; i++) {
+            parent.removeChild(nodes[0]);
+        }
+
+        let exitBtn = document.createElement('a');
+        exitBtn.className = 'user_handle';
+        exitBtn.innerHTML = '退出';
+        exitBtn.onclick = exit;
+        parent.appendChild(exitBtn);
+
+        let userBtn = document.createElement('a');
+        userBtn.className = 'user_handle';
+        userBtn.innerHTML = userName;
+
+        // TODO: 用户登录后显示用户名，后续点击用户名应跳转到个人中心页面
+        userBtn.onclick = exit;
+        parent.appendChild(userBtn);
+
+        let cartBtn = document.createElement('a');
+        cartBtn.className = 'user_handle';
+        cartBtn.innerHTML = '我的药箱';
+        cartBtn.id = 'my_drug_btn';
+        parent.appendChild(cartBtn);
+    } else
+        $("#mainContent").load("html/main.html");
+}
+
 function login() {
     let oUser = document.querySelector("#user").value;
     let oPwd = document.querySelector("#pwd").value;
-    let oMyDrug = document.querySelector('#my_drug_btn');
+
     let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
     httpRequest.open('POST', './LoginCheck', true); //第二步：打开连接
     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
@@ -36,12 +77,9 @@ function login() {
             console.log(json);
             if (json) {
                 alert(oUser + ', 欢迎你！');
-                sessionStorage.setItem('userName',oUser);
+                sessionStorage.setItem('userName', oUser);
                 document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
-                document.querySelector("#headerContent > header > nav > a:nth-child(4)").innerHTML = oUser;
-                 exitBtn=document.createElement('a');
-                 exitBtn.innerHTML=""
-                oMyDrug.style.display = '';
+                getUser();
             } else {
                 alert("用户名或密码错误！");
             }

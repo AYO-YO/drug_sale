@@ -53,6 +53,7 @@
     color: red;
     text-decoration: 1px solid red underline;
     cursor: pointer;
+    margin-right: 20px;
 }
 
 .user_handle:hover {
@@ -530,4 +531,8 @@ input[type="number"] {
 .btn_add_cart:hover {
     color: orangered;
     transform: scale(1.2);
+}
+
+.user_control_center {
+    float: right;
 }
