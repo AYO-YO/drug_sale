@@ -36,8 +36,11 @@ function login() {
             console.log(json);
             if (json) {
                 alert(oUser + ', 欢迎你！');
+                sessionStorage.setItem('userName',oUser);
                 document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                 document.querySelector("#headerContent > header > nav > a:nth-child(4)").innerHTML = oUser;
+                 exitBtn=document.createElement('a');
+                 exitBtn.innerHTML=""
                 oMyDrug.style.display = '';
             } else {
                 alert("用户名或密码错误！");

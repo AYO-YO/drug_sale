@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "loginCheck", value = "/LoginCheck")
 public class LoginCheck extends HttpServlet {
+    String userName;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");
@@ -19,6 +20,11 @@ public class LoginCheck extends HttpServlet {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        if (DBUtils.login(user, pwd)){
+            out.println(true);
+            userName=user;
+
+        }
         out.println(DBUtils.login(user, pwd));
     }
 
