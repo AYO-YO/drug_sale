@@ -22,7 +22,8 @@ public class DBUtils {
     public static boolean register(String name, String pwd) {
         Connection conn = getConn();
         String sql = "insert into user(name,pwd) values (?,?)";
-        try (PreparedStatement pstm = conn.prepareStatement(sql);) {
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, name);
             pstm.setString(2, pwd);
             return pstm.executeUpdate() >= 1;
@@ -36,7 +37,8 @@ public class DBUtils {
     public static int login(String name, String pwd) {
         Connection conn = getConn();
         String sql = "select _id from user where name=? and pwd=?";
-        try (PreparedStatement pstm = conn.prepareStatement(sql);) {
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, name);
             pstm.setString(2, pwd);
             ResultSet rs = pstm.executeQuery();
@@ -66,7 +68,7 @@ public class DBUtils {
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, drug_id);
-            return stmt.executeQuery(sql);
+            return stmt.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -109,10 +111,10 @@ public class DBUtils {
      * @param args
      */
     public static void main(String[] args) throws SQLException {
-        ResultSet rs = getCart("2");
+        ResultSet rs = getMeds("1");
         while (rs.next()) {
-            String drug_id = rs.getString("drug_id");
-            String num = rs.getString("num");
+            String drug_id = rs.getString("_id");
+            String num = rs.getString("name");
             System.out.println(drug_id + " " + num);
         }
     }

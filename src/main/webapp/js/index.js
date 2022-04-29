@@ -198,8 +198,85 @@ function getMeds() {
 
 function getCart() {
     let user_id = sessionStorage.getItem('user_id');
-    let httpRequest = doRequest();
+    let httpRequest = doRequest('./GetCart', "user_id=" + user_id, 'POST');
     httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+            let res = httpRequest.responseText;
+            console.log(res);
+            let target = document.querySelector('#cart_list');
+            let json = JSON.parse(res)
+            for (let row of json) {
+                let oTr = document.createElement('tr');
+                target.append(oTr);
+                let oId = document.createElement('td');
+                oId.innerHTML = row['drug_id'];
+                oTr.append(oId);
+                let oName = document.createElement('td');
+                oName.innerHTML = row['name'];
+                oTr.append(oName);
+                let oPrice = document.createElement('td');
+                oPrice.innerHTML = row['price'];
+                oTr.append(oPrice);
 
+                let oNum = document.createElement('td');
+                let inpNum = document.createElement('input');
+                inpNum.type = 'number';
+                inpNum.value = row['num'];
+                inpNum.disabled = true;
+                let btnRedu = document.createElement('button');
+                btnRedu.innerHTML = '-';
+                btnRedu.onclick = function () {
+                    // TODO: 后续需将数据同步至数据库
+                    inpNum.value = (parseInt(inpNum.value) - 1) + ""
+                }
+                let btnAdd = document.createElement('button');
+                btnAdd.innerHTML = '+';
+                btnAdd.onclick = function () {
+                    inpNum.value = (parseInt(inpNum.value) + 1) + ""
+                }
+                oNum.append(btnRedu);
+                oNum.appendChild(inpNum);
+                oNum.append(btnAdd);
+                oTr.append(oNum);
+
+                let oAllPrice = document.createElement('td');
+                oAllPrice.innerHTML = parseInt(inpNum.value) * row['price'] + '';
+                oTr.append(oAllPrice);
+
+                inpNum.onchange = function () {
+                    oAllPrice.innerHTML = parseInt(inpNum.value) * row['price'] + '';
+                }
+
+                let oHandle = document.createElement('td');
+
+                let aDel = document.createElement('a');
+                aDel.className = 'user_handle';
+                aDel.onclick = function () {
+                    let drug_id = row['drug_id'];
+                    let httpRequest = doRequest('./DelCart', 'user_id=' + user_id + '&drug_id=' + drug_id, 'POST');
+                    httpRequest.onreadystatechange = function () {
+                        if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
+                            let res = httpRequest.responseText;//获取到服务端返回的数据
+                            console.log(res);
+                            if (res === "true") {
+                                alert("删除成功！", "success");
+                            } else alert("删除失败！", "warning");
+                        }
+                    }
+                }
+                aDel.innerHTML = '删除';
+                oHandle.append(aDel);
+
+                let aBuy = document.createElement('a');
+                aBuy.className = 'user_handle';
+                aBuy.innerHTML = '购买';
+                aBuy.onclick = function () {
+                    // TODO: 购买功能未实现
+                    alert('暂不支持', 'warning');
+                }
+                oHandle.append(aBuy);
+                oTr.append(oHandle);
+            }
+        }
     }
 }
