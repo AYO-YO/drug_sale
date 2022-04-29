@@ -36,14 +36,14 @@ function loadIndex() {
 
 
 function exit() {
-    sessionStorage.removeItem('userName');
+    sessionStorage.removeItem('user_name');
     window.location.reload();
 }
 
 function getUser() {
-    let userName = sessionStorage.getItem('userName');
-    if (userName != null) {
-        console.log('用户' + userName + '已登录。')
+    let user_name = sessionStorage.getItem('user_name');
+    if (user_name != null) {
+        console.log('用户' + user_name + '已登录。')
         let parent = document.querySelector('.user_control_center');
         console.log(parent);
         let nodes = parent.children;
@@ -60,7 +60,7 @@ function getUser() {
 
         let userBtn = document.createElement('a');
         userBtn.className = 'user_handle';
-        userBtn.innerHTML = userName;
+        userBtn.innerHTML = user_name;
 
         // TODO: 用户登录后显示用户名，后续点击用户名应跳转到个人中心页面
         userBtn.onclick = exit;
@@ -69,20 +69,29 @@ function getUser() {
         let cartBtn = document.createElement('a');
         cartBtn.className = 'user_handle';
         cartBtn.innerHTML = '我的药箱';
+        cartBtn.onclick = function () {
+            $("#mainContent").load("html/cart.html");
+        }
         cartBtn.id = 'my_drug_btn';
         parent.appendChild(cartBtn);
     } else
         $("#mainContent").load("html/main.html");
 }
 
+function doRequest(url, data, method = 'POST') {
+    let httpRequest = new XMLHttpRequest(); // 创建对象
+    httpRequest.open(method, url, true); // 打开链接
+    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    httpRequest.send(data);
+    return httpRequest;
+}
+
 function login() {
     let oUser = document.querySelector("#user").value;
     let oPwd = document.querySelector("#pwd").value;
 
-    let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-    httpRequest.open('POST', './LoginCheck', true); //第二步：打开连接
-    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-    httpRequest.send('user=' + oUser + '&pwd=' + oPwd);//发送请求 将情头体写在send中
+    let httpRequest = doRequest('./LoginCheck', 'user=' + oUser + '&pwd=' + oPwd, 'POST');//第一步：创建需要的对象
+
     /**
      * 获取数据后的处理程序
      */
@@ -92,8 +101,8 @@ function login() {
             console.log(json);
             if (parseInt(json) !== -1) {
                 alert(oUser + ', 欢迎你！', 'success');
-                sessionStorage.setItem('userName', oUser);
-                sessionStorage.setItem('userId', json);
+                sessionStorage.setItem('user_name', oUser);
+                sessionStorage.setItem('user_id', json);
                 document.querySelector("#loginModal > div > div > div.modal-footer > button.btn.btn-secondary").click();
                 getUser();
             } else {
@@ -102,6 +111,7 @@ function login() {
         }
     };
 }
+
 
 function reg() {
     let oUser = document.querySelector("#reg_user").value;
@@ -142,7 +152,7 @@ function getMeds() {
             console.log(json);
             json = JSON.parse(json);
             console.log(json);
-            let user = sessionStorage.getItem('userId');
+            let user = sessionStorage.getItem('user_id');
             let tab = document.querySelector("#store_list");
             for (let meds of json) {
                 let s = '<tr id="cart_row_' + meds["id"] + '">';
@@ -152,7 +162,7 @@ function getMeds() {
                 s += "<td>" + meds['stock'] + "</td>";
                 s += "<td>" + meds['date'] + "</td>";
                 s += "<td>" + meds['life'] + "</td>";
-                // s += "<td><a class=\"btn_add_cart\" href=\"AddCart?medid=" + meds['id'] + "&userid=" + user + "\">加入购物车</a></td>";
+                // s += "<td><a class=\"btn_add_cart\" href=\"AddCart?medid=" + meds['id'] + "&user_id=" + user + "\">加入购物车</a></td>";
                 s += "</tr>";
                 tab.innerHTML += s;
                 let oRow = document.querySelector("#cart_row_" + meds["id"]);
@@ -163,7 +173,7 @@ function getMeds() {
                     let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
                     httpRequest.open('POST', './AddCart', true); //第二步：打开连接
                     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-                    httpRequest.send('medid=' + meds['id'] + '&userid=' + user);//发送请求 将情头体写在send中
+                    httpRequest.send('medid=' + meds['id'] + '&user_id=' + user);//发送请求 将情头体写在send中
                     /**
                      * 获取数据后的处理程序
                      */
@@ -184,4 +194,12 @@ function getMeds() {
             }
         }
     };
+}
+
+function getCart() {
+    let user_id = sessionStorage.getItem('user_id');
+    let httpRequest = doRequest();
+    httpRequest.onreadystatechange = function () {
+
+    }
 }

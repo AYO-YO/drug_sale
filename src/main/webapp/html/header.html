@@ -34,7 +34,7 @@
 
         $("#btn_goto_store").click(function () {
             console.log("跳转药品库");
-            let user = sessionStorage.getItem('userName');
+            let user = sessionStorage.getItem('user_name');
             if (user != null) {
                 $("#mainContent").load("html/store.html");
                 document.title = "药品库 - 帆帆大药房";

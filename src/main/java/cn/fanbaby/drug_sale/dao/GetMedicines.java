@@ -12,14 +12,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(name = "cn.fanbaby.drug_sale.dao.GetMedicines", value = "/cn.fanbaby.drug_sale.dao.GetMedicines")
+@WebServlet(name = "GetMedicines", value = "/GetMedicines")
 public class GetMedicines extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        ResultSet rs = DBUtils.getAllMeds();
+        String drug_id = request.getParameter("drug_id");
+        ResultSet rs;
+        if (drug_id == null)
+            rs = DBUtils.getMeds();
+        else
+            rs = DBUtils.getMeds(drug_id);
         ArrayList<String[]> arr = new ArrayList<>();
         try {
             while (rs.next()) {

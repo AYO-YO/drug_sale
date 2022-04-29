@@ -49,11 +49,23 @@ public class DBUtils {
         }
     }
 
-    public static ResultSet getAllMeds() {
+    public static ResultSet getMeds() {
         Connection conn = getConn();
         String sql = "select * from drug";
         try {
             Statement stmt = conn.createStatement();
+            return stmt.executeQuery(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ResultSet getMeds(String drug_id) {
+        Connection conn = getConn();
+        String sql = "select * from drug where _id=?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, drug_id);
             return stmt.executeQuery(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,6 +82,38 @@ public class DBUtils {
             return pstmt.executeUpdate() >= 1;
         } catch (SQLException e) {
             return false;
+        }
+    }
+
+    /**
+     * 获取用户购物车的内容
+     *
+     * @param userId 用户id
+     * @return 用户购物车内容及数量
+     */
+    public static ResultSet getCart(String userId) {
+        Connection conn = getConn();
+        String sql = "select drug_id,num from cart where user_id=?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 测试方法
+     *
+     * @param args
+     */
+    public static void main(String[] args) throws SQLException {
+        ResultSet rs = getCart("2");
+        while (rs.next()) {
+            String drug_id = rs.getString("drug_id");
+            String num = rs.getString("num");
+            System.out.println(drug_id + " " + num);
         }
     }
 }

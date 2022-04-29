@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<ul>
-  <li class="li_meds bg_model">
-    <h1>medicines name</h1>
-    <div class="cart_main">
-      <p class="price sing_price">price</p>
-      <div class="cart_numb">
-        <button class="cart_numb_btn cart_numb_dec">-</button>
-        <input id="meds_numb" max="20" min="1" name="meds_numb" type="number" value="1">
-        <button class="cart_numb_btn cart_numb_inc">+</button>
-      </div>
-      <p class="price all_price">all price</p>
-    </div>
-    <div class="cart_foot">
-      <button>删除</button>
-      <button>购买</button>
-    </div>
-  </li>
-</ul>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>药品id</th>
+        <th>药品名称</th>
+        <th>价格</th>
+        <th>剩余库存</th>
+        <th>生产日期</th>
+        <th>保质期（月）</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="cart_list"></tbody>
+</table>
+<script>
+    getCart();
+</script>
 </body>
 </html>
