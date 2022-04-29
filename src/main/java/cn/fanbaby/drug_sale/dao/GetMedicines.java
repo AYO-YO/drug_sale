@@ -1,3 +1,5 @@
+package cn.fanbaby.drug_sale.dao;
+
 import cn.fanbaby.drug_sale.utils.DBUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(name = "GetMedicines", value = "/GetMedicines")
+@WebServlet(name = "cn.fanbaby.drug_sale.dao.GetMedicines", value = "/cn.fanbaby.drug_sale.dao.GetMedicines")
 public class GetMedicines extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -1,4 +1,4 @@
-package cn.fanbaby.drug_sale;
+package cn.fanbaby.drug_sale.dao;
 
 import cn.fanbaby.drug_sale.utils.DBUtils;
 
