@@ -160,7 +160,6 @@ function getMeds() {
                 oA.innerHTML = "加入购物车";
                 oA.className = "btn_add_cart";
                 oA.onclick = function () {
-                    alert('加入购物车', 'warning')
                     let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
                     httpRequest.open('POST', './AddCart', true); //第二步：打开连接
                     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
