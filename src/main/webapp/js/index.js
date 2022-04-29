@@ -11,16 +11,17 @@ function handleDots() {
 }
 
 function alert(message, type) {
-    let wrapper = document.createElement('div')
-    document.body.appendChild(wrapper);
-    wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible fade hide" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-    wrapper = wrapper.childNodes[0];
-    wrapper.className = 'alert alert-' + type + ' alert-dismissible fade show';
+    let wrapper = document.querySelector('body');
+    let messageBox = document.createElement('div');
+    messageBox.role = 'alert';
+    messageBox.innerHTML = message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
+    wrapper.insertBefore(messageBox, wrapper.children[0]);
+    messageBox.className = 'alert alert-' + type + ' alert-dismissible fade show';
     window.setTimeout(function () {
-        wrapper.className = 'alert alert-' + type + ' alert-dismissible fade hide';
+        messageBox.className = 'alert alert-' + type + ' alert-dismissible fade hide';
     }, 2000);//显示的时间
     window.setTimeout(function () {
-        wrapper.parentNode.remove();
+        messageBox.remove();
     }, 3000);
 }
 
@@ -159,6 +160,7 @@ function getMeds() {
                 oA.innerHTML = "加入购物车";
                 oA.className = "btn_add_cart";
                 oA.onclick = function () {
+                    alert('加入购物车', 'warning')
                     let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
                     httpRequest.open('POST', './AddCart', true); //第二步：打开连接
                     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
@@ -170,9 +172,10 @@ function getMeds() {
                         if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
                             let json = httpRequest.responseText;//获取到服务端返回的数据
                             console.log(json);
-                            if (json) {
-                                alert("加入购物车成功！");
-                            } else alert("不可重复加购！");
+                            console.log(typeof json)
+                            if (json === "true") {
+                                alert("加入购物车成功！", "success");
+                            } else alert("不可重复加购！", "warning");
                         }
                     };
                 }
