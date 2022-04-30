@@ -74,8 +74,7 @@ function getUser() {
         }
         cartBtn.id = 'my_drug_btn';
         parent.appendChild(cartBtn);
-    } else
-        $("#mainContent").load("html/main.html");
+    } else $("#mainContent").load("html/main.html");
 }
 
 function doRequest(url, data, method = 'POST') {
@@ -155,21 +154,37 @@ function getMeds() {
             let user = sessionStorage.getItem('user_id');
             let tab = document.querySelector("#store_list");
             for (let meds of json) {
-                let s = '<tr id="cart_row_' + meds["id"] + '">';
-                s += "<td>" + meds['id'] + "</td>";
-                s += "<td>" + meds['name'] + "</td>";
-                s += "<td>" + meds['price'] + "</td>";
-                s += "<td>" + meds['stock'] + "</td>";
-                s += "<td>" + meds['date'] + "</td>";
-                s += "<td>" + meds['life'] + "</td>";
-                // s += "<td><a class=\"btn_add_cart\" href=\"AddCart?medid=" + meds['id'] + "&user_id=" + user + "\">加入购物车</a></td>";
-                s += "</tr>";
-                tab.innerHTML += s;
-                let oRow = document.querySelector("#cart_row_" + meds["id"]);
-                let oA = document.createElement("a");
-                oA.innerHTML = "加入购物车";
-                oA.className = "btn_add_cart";
-                oA.onclick = function () {
+                let oRow = document.createElement('tr');
+                tab.appendChild(oRow);
+
+                let tdId = document.createElement('td');
+                oRow.appendChild(tdId);
+                tdId.innerHTML = meds['id'];
+
+                let tdName = document.createElement('td');
+                oRow.appendChild(tdName);
+                tdName.innerHTML = meds['name'];
+
+                let tdPrice = document.createElement('td');
+                oRow.appendChild(tdPrice);
+                tdPrice.innerHTML = meds['price'];
+
+                let tdStock = document.createElement('td');
+                oRow.appendChild(tdStock);
+                tdStock.innerHTML = meds['stock'];
+
+                let tdData = document.createElement('td');
+                oRow.appendChild(tdData);
+                tdData.innerHTML = meds['date'];
+
+                let tdLife = document.createElement('td');
+                oRow.appendChild(tdLife);
+                tdLife.innerHTML = meds['life'];
+
+                let aAddCart = document.createElement("a");
+                aAddCart.innerHTML = "加入购物车";
+                aAddCart.className = "btn_add_cart";
+                aAddCart.onclick = function () {
                     let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
                     httpRequest.open('POST', './AddCart', true); //第二步：打开连接
                     httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
@@ -182,14 +197,13 @@ function getMeds() {
                             let json = httpRequest.responseText;//获取到服务端返回的数据
                             console.log(json.length);
                             console.log(json);
-                            if (json === 'true') alert("加入购物车成功！", "success");
-                            else alert("不可重复加购！", "warning");
+                            if (json === 'true') alert("加入购物车成功！", "success"); else alert("不可重复加购！", "warning");
                         }
                     };
                 }
-                let oTd = document.createElement('td');
-                oTd.appendChild(oA);
-                oRow.appendChild(oTd);
+                let tdA = document.createElement('td');
+                tdA.appendChild(aAddCart);
+                oRow.appendChild(tdA);
             }
         }
     };
