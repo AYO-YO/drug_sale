@@ -16,9 +16,9 @@ public class AddCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         String drug_id = request.getParameter("medid");
-        String user_id = request.getParameter("userid");
+        String user_id = request.getParameter("user_id");
         response.setContentType("text/html;utf-8");
         PrintWriter out = response.getWriter();
-        out.println(DBUtils.addCart(user_id, drug_id));
+        out.print(DBUtils.addCart(user_id, drug_id));
     }
 }

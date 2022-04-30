@@ -180,11 +180,10 @@ function getMeds() {
                     httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
                         if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
                             let json = httpRequest.responseText;//获取到服务端返回的数据
+                            console.log(json.length);
                             console.log(json);
-                            console.log(typeof json)
-                            if (json === "true") {
-                                alert("加入购物车成功！", "success");
-                            } else alert("不可重复加购！", "warning");
+                            if (json === 'true') alert("加入购物车成功！", "success");
+                            else alert("不可重复加购！", "warning");
                         }
                     };
                 }
