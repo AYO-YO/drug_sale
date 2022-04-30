@@ -105,17 +105,25 @@ public class DBUtils {
         }
     }
 
+    public static boolean delCart(String user_id, String drug_id) {
+        Connection conn = getConn();
+        String sql = "delete from cart where user_id=? and drug_id=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user_id);
+            ps.setString(2, drug_id);
+            return ps.executeUpdate() >= 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * 测试方法
      *
      * @param args
      */
     public static void main(String[] args) throws SQLException {
-        ResultSet rs = getMeds("1");
-        while (rs.next()) {
-            String drug_id = rs.getString("_id");
-            String num = rs.getString("name");
-            System.out.println(drug_id + " " + num);
-        }
+        System.out.println(delCart("2", "2"));
     }
 }
