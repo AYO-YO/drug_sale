@@ -259,6 +259,7 @@ function getCart() {
                             console.log(res);
                             if (res === "true") {
                                 alert("删除成功！", "success");
+                                $("#mainContent").load("html/cart.html");
                             } else alert("删除失败！", "warning");
                         }
                     }
