@@ -185,13 +185,7 @@ function getMeds() {
                 aAddCart.innerHTML = "加入购物车";
                 aAddCart.className = "btn_add_cart";
                 aAddCart.onclick = function () {
-                    let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-                    httpRequest.open('POST', './AddCart', true); //第二步：打开连接
-                    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-                    httpRequest.send('medid=' + meds['id'] + '&user_id=' + user);//发送请求 将情头体写在send中
-                    /**
-                     * 获取数据后的处理程序
-                     */
+                    let httpRequest = doRequest('./AddCart', 'medid=' + meds['id'] + '&user_id=' + user, 'POST');
                     httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
                         if (httpRequest.readyState === 4 && httpRequest.status === 200) {//验证请求是否发送成功
                             let json = httpRequest.responseText;//获取到服务端返回的数据
