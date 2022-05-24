@@ -4,7 +4,7 @@ public class Config {
 
     public String getURL() {
         String HOST = "114.116.105.214";
-        int PORT = 3306;
+        int PORT = 3366;
         String DATABASE = "drug_sale";
         return "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
     }

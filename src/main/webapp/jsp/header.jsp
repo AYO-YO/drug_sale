@@ -49,7 +49,6 @@
             $("#mainContent").load("${pageContext.request.contextPath}/jsp/main.jsp");
             document.title = "帆帆大药房 - 你的家庭药师";
         });
-
         getUser();
     </script>
 </header>
