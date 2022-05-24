@@ -1,4 +1,4 @@
-package cn.fanbaby.drug_sale.dao;
+package cn.fanbaby.drug_sale.servlet;
 
 import cn.fanbaby.drug_sale.utils.DBUtils;
 import com.alibaba.fastjson2.JSONArray;

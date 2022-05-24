@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <!-- 我们希望在配置文件中，出现链接的参数信息 -->
+    <default-config>
+        <!-- name 属性定义 链接参数的key 标签的内容 代表值-->
+        <property name="jdbcUrl">jdbc:mysql://114.116.105.214:3366/drug_sale</property>
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+
+        <property name="user">drug_sale</property>
+        <property name="password">fanfan123</property>
+
+        <!-- 连接池参数 -->
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">2</property>
+        <property name="maxPoolSize">50</property>
+
+
+    </default-config>
+
+</c3p0-config>
