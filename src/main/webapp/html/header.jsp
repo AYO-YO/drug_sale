@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -36,7 +37,7 @@
             console.log("跳转药品库");
             let user = sessionStorage.getItem('user_name');
             if (user != null) {
-                $("#mainContent").load("html/store.html");
+                $("#mainContent").load("html/store.jsp");
                 document.title = "药品库 - 帆帆大药房";
             } else {
                 alert('请先登录！', 'danger');
@@ -45,7 +46,7 @@
 
         $("#btn_goto_index").click(function () {
             console.log("跳转首页")
-            $("#mainContent").load("html/main.html");
+            $("#mainContent").load("html/main.jsp");
             document.title = "帆帆大药房 - 你的家庭药师";
         });
 

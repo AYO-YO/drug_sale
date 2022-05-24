@@ -27,10 +27,10 @@ function alert(message, type) {
 
 function loadIndex() {
     $(document).ready(function () {
-        $("#commonContent").load("html/common.html");
-        $("#headerContent").load("html/header.html");
-        $("#mainContent").load("html/main.html");
-        $("#footerContent").load("html/footer.html");
+        $("#commonContent").load("html/common.jsp");
+        $("#headerContent").load("html/header.jsp");
+        $("#mainContent").load("html/main.jsp");
+        $("#footerContent").load("html/footer.jsp");
     });
 }
 
@@ -70,11 +70,11 @@ function getUser() {
         cartBtn.className = 'user_handle';
         cartBtn.innerHTML = '我的药箱';
         cartBtn.onclick = function () {
-            $("#mainContent").load("html/cart.html");
+            $("#mainContent").load("html/cart.jsp");
         }
         cartBtn.id = 'my_drug_btn';
         parent.appendChild(cartBtn);
-    } else $("#mainContent").load("html/main.html");
+    } else $("#mainContent").load("html/main.jsp");
 }
 
 function doRequest(url, data, method = 'POST') {
@@ -267,7 +267,7 @@ function getCart() {
                             console.log(res);
                             if (res === "true") {
                                 alert("删除成功！", "success");
-                                $("#mainContent").load("html/cart.html");
+                                $("#mainContent").load("html/cart.jsp");
                             } else alert("删除失败！", "warning");
                         }
                     }
