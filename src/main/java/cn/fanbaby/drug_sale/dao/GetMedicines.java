@@ -12,12 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet(name = "GetMedicines", value = "/GetMedicines")
+@WebServlet(name = "GetMedicines", urlPatterns = "/GetMedicines")
 public class GetMedicines extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         String drug_id = request.getParameter("drug_id");
         ResultSet rs;

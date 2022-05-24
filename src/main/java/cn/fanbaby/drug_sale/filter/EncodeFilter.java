@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * 编码过滤器
  */
-@WebFilter(filterName = "EncodeFilter")
+@WebFilter(filterName = "EncodeFilter", urlPatterns = "/*")
 public class EncodeFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

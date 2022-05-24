@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "DelCart", value = "/DelCart")
+@WebServlet(name = "DelCart", urlPatterns = "/DelCart")
 public class DelCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         String user_id = request.getParameter("user_id");
         String drug_id = request.getParameter("drug_id");
         response.setContentType("text/html; charset=UTF-8");

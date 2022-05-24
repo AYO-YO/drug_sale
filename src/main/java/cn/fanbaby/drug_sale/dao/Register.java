@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Register", value = "/Register")
+@WebServlet(name = "Register", urlPatterns = "/Register")
 public class Register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
         response.setContentType("text/html");
