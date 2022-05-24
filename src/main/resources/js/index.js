@@ -27,10 +27,10 @@ function alert(message, type) {
 
 function loadIndex() {
     $(document).ready(function () {
-        $("#commonContent").load("html/common.jsp");
-        $("#headerContent").load("html/header.jsp");
-        $("#mainContent").load("html/main.jsp");
-        $("#footerContent").load("html/footer.jsp");
+        $("#commonContent").load("${pageContext.request.contextPath}/jsp/common.jsp");
+        $("#headerContent").load("${pageContext.request.contextPath}/jsp/header.jsp");
+        $("#mainContent").load("${pageContext.request.contextPath}/jsp/main.jsp");
+        $("#footerContent").load("${pageContext.request.contextPath}/jsp/footer.jsp");
     });
 }
 
@@ -70,11 +70,11 @@ function getUser() {
         cartBtn.className = 'user_handle';
         cartBtn.innerHTML = '我的药箱';
         cartBtn.onclick = function () {
-            $("#mainContent").load("html/cart.jsp");
+            $("#mainContent").load("${pageContext.request.contextPath}/jsp/cart.jsp");
         }
         cartBtn.id = 'my_drug_btn';
         parent.appendChild(cartBtn);
-    } else $("#mainContent").load("html/main.jsp");
+    } else $("#mainContent").load("${pageContext.request.contextPath}/jsp/main.jsp");
 }
 
 function doRequest(url, data, method = 'POST') {
@@ -267,7 +267,7 @@ function getCart() {
                             console.log(res);
                             if (res === "true") {
                                 alert("删除成功！", "success");
-                                $("#mainContent").load("html/cart.jsp");
+                                $("#mainContent").load("${pageContext.request.contextPath}/jsp/cart.jsp");
                             } else alert("删除失败！", "warning");
                         }
                     }

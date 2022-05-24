@@ -9,7 +9,7 @@
 <div data-bs-dismiss="alert" id="liveAlertPlaceholder"></div>
 <header class="header">
     <nav class="top_bar">
-        <img alt="" class="logo" src="img/logo.png">
+        <img alt="" class="logo" src="${pageContext.request.contextPath}/img/logo.png">
         <ul class="top_nav_bar">
             <li id="btn_goto_index">首页</li>
             <li id="btn_goto_store">药库</li>
@@ -37,7 +37,7 @@
             console.log("跳转药品库");
             let user = sessionStorage.getItem('user_name');
             if (user != null) {
-                $("#mainContent").load("html/store.jsp");
+                $("#mainContent").load("${pageContext.request.contextPath}/jsp/store.jsp");
                 document.title = "药品库 - 帆帆大药房";
             } else {
                 alert('请先登录！', 'danger');
@@ -46,7 +46,7 @@
 
         $("#btn_goto_index").click(function () {
             console.log("跳转首页")
-            $("#mainContent").load("html/main.jsp");
+            $("#mainContent").load("${pageContext.request.contextPath}/jsp/main.jsp");
             document.title = "帆帆大药房 - 你的家庭药师";
         });
 
