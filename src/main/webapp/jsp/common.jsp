@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/LoginCheck" method="post" role="form">
+                <form action="" method="post" role="form">
                     <div class="mb-3">
                         <label class="form-label" for="user">用户名</label>
                         <input class="form-control" id="user" name="user" placeholder="请输入用户名" type="text">
@@ -52,7 +52,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/Register" method="post" role="form">
+                <form action="" method="post" role="form">
                     <div class="mb-3">
                         <label class="form-label" for="reg_user">用户名</label>
                         <input class="form-control" id="reg_user" name="user" placeholder="请输入用户名" type="text">

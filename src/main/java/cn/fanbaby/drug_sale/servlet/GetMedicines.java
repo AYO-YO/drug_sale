@@ -1,6 +1,10 @@
 package cn.fanbaby.drug_sale.servlet;
 
-import cn.fanbaby.drug_sale.utils.DBUtils;
+import cn.fanbaby.drug_sale.bean.Drug;
+import cn.fanbaby.drug_sale.service.DrugService;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "GetMedicines", urlPatterns = "/GetMedicines")
 public class GetMedicines extends HttpServlet {
@@ -18,42 +22,29 @@ public class GetMedicines extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         String drug_id = request.getParameter("drug_id");
-        ResultSet rs;
-        if (drug_id == null)
-            rs = DBUtils.getMeds();
-        else
-            rs = DBUtils.getMeds(drug_id);
-        ArrayList<String[]> arr = new ArrayList<>();
-        try {
-            while (rs.next()) {
-                String id = rs.getString("_id");
-                String name = rs.getString("name");
-                String price = rs.getString("price");
-                String stock = rs.getString("stock");
-                String product = rs.getString("product_date");
-                String shelfLife = rs.getString("shelf_life");
-                String[] res = new String[]{id, name, price, stock, product, shelfLife};
-                arr.add(res);
+        DrugService ds = new DrugService();
+        List<Drug> drugs = new ArrayList<>();
+        Drug drug = new Drug();
+        JSONArray jsonArray = new JSONArray();
+        if (drug_id == null) {
+            try {
+                drugs = ds.getMeds();
+                for (Drug d : drugs) {
+                    JSONObject obj = JSON.parseObject(d.toString());
+                    jsonArray.add(obj);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < arr.size(); i++) {
-            String[] strings = arr.get(i);
-            sb.append("{");
-            sb.append("\"id\":\"").append(strings[0]).append("\",");
-            sb.append("\"name\":\"").append(strings[1]).append("\",");
-            sb.append("\"price\":\"").append(strings[2]).append("\",");
-            sb.append("\"stock\":\"").append(strings[3]).append("\",");
-            sb.append("\"date\":\"").append(strings[4]).append("\",");
-            sb.append("\"life\":\"").append(strings[5]).append("\"");
-            sb.append("}");
-            if (i < arr.size() - 1) {
-                sb.append(",");
+        } else {
+            try {
+                drug = ds.getMeds(drug_id);
+                JSONObject obj = JSON.parseObject(drug.toString());
+                jsonArray.add(obj);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
-        sb.append("]");
-        out.println(sb);
+        out.println(jsonArray);
     }
 }
