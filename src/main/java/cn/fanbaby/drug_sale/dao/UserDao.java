@@ -8,14 +8,14 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import java.sql.SQLException;
 
 public class UserDao {
-    public static boolean register(User u) throws SQLException {
+    public boolean register(String name, String pwd) throws SQLException {
         QueryRunner qr = new QueryRunner(MyDB.getSource());
         String sql = "insert into user(name,pwd) values (?,?)";
-        int row = qr.update(sql, u.getName(), u.getPassword());
+        int row = qr.update(sql, name, pwd);
         return row > 0;
     }
 
-    public static int login(String name, String pwd) throws SQLException {
+    public int login(String name, String pwd) throws SQLException {
         QueryRunner qr = new QueryRunner(MyDB.getSource());
         String sql = "select * from user where name=? and pwd=?";
         User user;
