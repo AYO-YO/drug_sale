@@ -223,13 +223,25 @@ function getCart() {
                 oTr.append(oPrice);
 
                 let oNum = document.createElement('td');
+                oNum.style.overflow = "hidden";
+                oNum.style.height = "45px";
                 let inpNum = document.createElement('input');
                 let oAllPrice = document.createElement('td');
                 inpNum.type = 'number';
                 inpNum.value = row['num'];
                 inpNum.disabled = true;
+                inpNum.className = "form-control";
+                inpNum.style.textAlign = "center";
+
+                let divGroup = document.createElement('div');
+                divGroup.className = "input-group";
+                divGroup.style.margin = "0";
+                divGroup.style.width = "120px";
+                oNum.appendChild(divGroup);
+
                 let btnRedu = document.createElement('button');
                 btnRedu.innerHTML = '-';
+                btnRedu.className = "btn btn-warning";
                 btnRedu.onclick = function () {
                     // TODO: 后续需将数据同步至数据库
                     let new_num = parseInt(inpNum.value) - 1;
@@ -240,6 +252,7 @@ function getCart() {
                 }
                 let btnAdd = document.createElement('button');
                 btnAdd.innerHTML = '+';
+                btnAdd.className = "btn btn-success";
                 btnAdd.onclick = function () {
                     let new_num = parseInt(inpNum.value) + 1;
                     if (new_num <= 0)
@@ -247,9 +260,9 @@ function getCart() {
                     inpNum.value = (new_num) + "";
                     oAllPrice.innerHTML = (parseInt(inpNum.value) * row['price']).toFixed(2) + '';
                 }
-                oNum.append(btnRedu);
-                oNum.appendChild(inpNum);
-                oNum.append(btnAdd);
+                divGroup.append(btnRedu);
+                divGroup.appendChild(inpNum);
+                divGroup.append(btnAdd);
                 oTr.append(oNum);
 
                 oAllPrice.innerHTML = (parseInt(inpNum.value) * row['price']).toFixed(2) + '';
