@@ -20,9 +20,9 @@ public class EncodeFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        resp.setContentType("text/html;charset=utf-8");
         req.setCharacterEncoding("utf-8");
+        HttpServletResponse resp = (HttpServletResponse) response;
+        resp.setCharacterEncoding("utf-8");
         chain.doFilter(req, resp);
     }
 }

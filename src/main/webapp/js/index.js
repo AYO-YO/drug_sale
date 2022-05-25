@@ -1,4 +1,4 @@
-function handleDots() {
+﻿function handleDots() {
     let dots = document.getElementsByClassName('li_dot');
     for (let j = 0; j < 5; j++) {
         dots[j].onmouseenter = function () {

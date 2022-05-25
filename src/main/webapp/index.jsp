@@ -11,11 +11,11 @@
     <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.3/js/bootstrap.bundle.js"></script>
-    <script src="js/index.js" charset="UTF-8"></script>
-    <link href="css/init.css" rel="stylesheet">
-    <link href="font/iconfont.css" rel="stylesheet">
-    <link href="css/thisWeb.css" rel="stylesheet">
-    <link href="css/css_index.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/init.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/font/iconfont.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/thisWeb.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/css_index.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/index.js" charset="UTF-8"></script>
     <script>
         function scrollBottom() {
             let tops = document.getElementsByClassName('return_top')[0];
