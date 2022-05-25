@@ -224,6 +224,7 @@ function getCart() {
 
                 let oNum = document.createElement('td');
                 let inpNum = document.createElement('input');
+                let oAllPrice = document.createElement('td');
                 inpNum.type = 'number';
                 inpNum.value = row['num'];
                 inpNum.disabled = true;
@@ -231,20 +232,27 @@ function getCart() {
                 btnRedu.innerHTML = '-';
                 btnRedu.onclick = function () {
                     // TODO: 后续需将数据同步至数据库
-                    inpNum.value = (parseInt(inpNum.value) - 1) + ""
+                    let new_num = parseInt(inpNum.value) - 1;
+                    if (new_num <= 0)
+                        new_num = 1;
+                    inpNum.value = (new_num) + "";
+                    oAllPrice.innerHTML = (parseInt(inpNum.value) * row['price']).toFixed(2) + '';
                 }
                 let btnAdd = document.createElement('button');
                 btnAdd.innerHTML = '+';
                 btnAdd.onclick = function () {
-                    inpNum.value = (parseInt(inpNum.value) + 1) + ""
+                    let new_num = parseInt(inpNum.value) + 1;
+                    if (new_num <= 0)
+                        new_num = 1;
+                    inpNum.value = (new_num) + "";
+                    oAllPrice.innerHTML = (parseInt(inpNum.value) * row['price']).toFixed(2) + '';
                 }
                 oNum.append(btnRedu);
                 oNum.appendChild(inpNum);
                 oNum.append(btnAdd);
                 oTr.append(oNum);
 
-                let oAllPrice = document.createElement('td');
-                oAllPrice.innerHTML = parseInt(inpNum.value) * row['price'] + '';
+                oAllPrice.innerHTML = (parseInt(inpNum.value) * row['price']).toFixed(2) + '';
                 oTr.append(oAllPrice);
 
                 inpNum.onchange = function () {
