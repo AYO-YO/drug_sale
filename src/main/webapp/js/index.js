@@ -138,10 +138,7 @@ function reg() {
 
 function getMeds() {
     console.log("函数执行");
-    let httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
-    httpRequest.open('POST', './GetMedicines', true); //第二步：打开连接
-    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-    httpRequest.send();
+    let httpRequest = doRequest('./GetMedicines', '');
     /**
      * 获取数据后的处理程序
      */
@@ -159,7 +156,7 @@ function getMeds() {
 
                 let tdId = document.createElement('td');
                 oRow.appendChild(tdId);
-                tdId.innerHTML = meds['id'];
+                tdId.innerHTML = meds['_id'];
 
                 let tdName = document.createElement('td');
                 oRow.appendChild(tdName);
@@ -175,11 +172,11 @@ function getMeds() {
 
                 let tdData = document.createElement('td');
                 oRow.appendChild(tdData);
-                tdData.innerHTML = meds['date'];
+                tdData.innerHTML = meds['product_date'];
 
                 let tdLife = document.createElement('td');
                 oRow.appendChild(tdLife);
-                tdLife.innerHTML = meds['life'];
+                tdLife.innerHTML = meds['shelf_life'];
 
                 let aAddCart = document.createElement("a");
                 aAddCart.innerHTML = "加入购物车";

@@ -7,11 +7,11 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "user_id=" + user_id +
-                ", drug_id=" + drug_id +
-                ", num=" + num +
-                '}';
+        return "{" +
+                "\"user_id\":" + user_id + "," +
+                "\"drug_id\":" + drug_id + "," +
+                "\"num\":" + num + "" +
+                "}";
     }
 
     public int getUser_id() {

@@ -60,13 +60,13 @@ public class Drug {
 
     @Override
     public String toString() {
-        return "Drug{" +
-                "_id=" + _id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", product_date=" + product_date +
-                ", shelf_life=" + shelf_life +
-                '}';
+        return "{" +
+                "\"_id\":" + _id + "," +
+                "\"name\":\"" + name + "\"," +
+                "\"price\":" + price + "," +
+                "\"stock\":" + stock + "," +
+                "\"product_date\":\"" + product_date + "\"," +
+                "\"shelf_life\":" + shelf_life + "" +
+                "}";
     }
 }

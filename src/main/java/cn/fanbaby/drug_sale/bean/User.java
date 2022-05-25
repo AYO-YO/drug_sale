@@ -40,6 +40,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "_id=" + _id + ", name='" + name + '\'' + ", password='" + password + '\'' + ", role=" + role + '}';
+        return "{" +
+                "\"_id\":" + _id + "," +
+                "\"name\":\"" + name + "\"," +
+                "\"password\":\"" + password + "\"," +
+                "\"role\":" + role + "" +
+                "}";
     }
 }

@@ -40,8 +40,10 @@ public class GetCart extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            JSONObject obj = new JSONObject();
+            JSONObject obj;
             obj = JSON.parseObject(drug.toString());
+            obj.put("drug_id", cart.getDrug_id());
+            obj.put("num", cart.getNum());
             jsonArray.add(obj);
         }
         out.println(jsonArray);
